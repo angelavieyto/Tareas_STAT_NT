@@ -1,1 +1,2 @@
 # Tareas_STAT_NT
+El presente repositorio fue creado en el marco de la materia Nuevas Tecnologías para el Análisis Estadístico de Datos con el propósito de facilitar la entrega y corrección de tareas y actividades.
