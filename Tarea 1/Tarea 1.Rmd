@@ -1,6 +1,6 @@
 ---
 title: "Tarea 1"
-author: "Curso NTAED"
+author: "Ángela Vieyto 5.487.839-8"
 date: "Entrega 7 de Mayo"
 output: 
   pdf_document:
