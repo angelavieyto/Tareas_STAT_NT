@@ -1,51 +1,187 @@
 ---
 title: "Actividad Individual 8"
-author: "Natalia da Silva"
-date: ""
+author: "Ángela Vieyto 5.487.839-8"
+date: "Entrega 17/5/2021"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-Esta actividad tiene que quedar disponible en su repositorio de GitHub con el resto de las actividades y tareas del curso. Asegurate que tanto Federico como yo seamos colaboradoras de tu proyecto Tareas_STAT_NT creado hace dos semanas.
-Recordar seleccionar en en opciones de proyecto, codificación de código UTF-8.
-Recordar que para que tengas la última version de tu repositorio en GitHub debes hacer pull a tu repositorio para tener la copia localmente en tu computadora y no generar inconsistencias y antes de terminar subir tus cambios con `commit` y `push`.
-
-
-
-
+ 
+ 
+ 
 # Ejercicio 1
 Cargar la librería `tidyverse` y con los datos `mpg` usar las funciones que vimos de `dplyr` para  transformar los datos de la siguiente forma. 
 
-1. Seleccionar el conjunto de autos del 2008 que tienen `hwy` mayor a 31.
+```{r , message = FALSE}
+library(tidyverse)
+```
+ 
+ 
+1. Seleccionar el conjunto de autos del 2008 que tienen `hwy` mayor a 31. ¿Cuántos autos son?
 
-¿Cuantos autos son?
+```{r ej. 1}
+filter(mpg, year == 2008 & hwy > 31)
+```
 
-2. Seleccionar el conjunto de autos que tienen `cty` igual a 9 ó hwy es mayor a 90. ¿Cuantos autos son? 
+Hay 6 autos del 2008 con un rendimiento en carretera mayor a 31 millas por galón de combustible.
+ 
+ 
+ 
+2. Seleccionar el conjunto de autos que tienen `cty` igual a 9 o hwy es mayor a 90. ¿Cuantos autos son? 
 
-3. Seleccioná la variable `displ` y `hwy`.
+```{r ej. 2}
+filter(mpg, cty == 9 | hwy > 90)
+```
 
-4. Seleccioná desde la variable `trans` hasta la variable `hwy`.
+Hay 5 autos con un rendimiento en ciudad de 9 millas por galón de combustible, pero no hay ningún auto con un rendimiento en carretera mayor a 90 millas por galón de combustible.
+ 
+ 
+ 
+3. Seleccionar las variables `displ` y `hwy`.
 
-5. Produce un dataframe: marca, modelo, año, cantidad de cilindros y rendimiento en ciudad. Únicamente para los autos, toyota, camry. 
+```{r ej. 3}
+select(mpg, c(displ, hwy))
+```
+ 
+ 
+ 
+4. Seleccionar desde la variable `trans` hasta la variable `hwy`.
 
+```{r ej. 4}
+select(mpg, trans:hwy)
+```
+ 
+ 
+ 
+5. Producir un data.frame: marca, modelo, año, cantidad de cilindros y rendimiento en ciudad. Únicamente para los autos, toyota, camry. 
 
-6. Calcula el rendimiento promedio en ciudad para cada marca (`manufacturer`). ¿Cuál es el mejor rendimiento en ciudad? y el peor ?  
+```{r ej. 5}
+# Opción 1
+filter(select(mpg, c(manufacturer, model, year, cyl, cty)),
+       manufacturer == "toyota" & model == "camry")
 
+# Opción 2
+mpg %>%
+  filter(manufacturer == "toyota" & model == "camry") %>%
+    select(c(manufacturer, model, year, cyl, cty))
+```
+ 
+ 
+ 
+6. Calcular el rendimiento promedio en ciudad para cada marca (`manufacturer`). ¿Cuál es el mejor rendimiento en ciudad? ¿Y el peor?  
 
-7. Para cada marca: calcula el rendimiento promedio en ciudad, el error estandard de la media, y el rango
+```{r ej. 6}
+mpg %>%
+  group_by(manufacturer) %>%
+    summarise(mean_cty = mean(cty)) %>%
+      ggplot(aes(x = reorder(manufacturer, -mean_cty), y = mean_cty)) +
+      geom_col(fill = 2) +
+      labs(x = "fabricante",
+           y = "rendimiento promedio",
+           title = "Rendimiento promedio en ciudad (en millas por galón)",
+           subtitle = "1999 - 2008") + 
+      geom_text(aes(label = round(mean_cty, 0)), vjust = 1.5) +
+      theme (plot.title = element_text(face = "bold"),
+             axis.title = element_text(face = "bold"),
+             axis.text.x = element_text(angle = 90))
+```
 
+Mientras que Honda presenta el mejor rendimiento promedio en ciudad (ascendiendo a 24 millas por galón), Lincoln presenta el peor rendimiento (ascendiendo a 11 millas por galón).
+ 
+ 
+ 
+7. Para cada marca: calcular el rendimiento promedio en ciudad, el error estándar de la media y el rango.
 
+```{r ej. 7, message = FALSE}
+# Opción 1 - dos líneas por fabricante
+mpg %>%
+  group_by(manufacturer) %>%
+    summarise(mean_cty = mean(cty),
+              sd_cty = sd(cty),
+              range_cty = range(cty))
+
+# Opción 2 - una línea por fabricante
+mpg %>%
+  group_by(manufacturer) %>%
+    summarise(mean_cty = mean(cty),
+              sd_cty = sd(cty),
+              min_cty = min(cty),
+              max_cty = max(cty))
+```
+
+ 
+ 
 8. Mejora en el rendimiento: calcular el rendimiento promedio para cada marca, distinguiendo antes y después de 2004
 
+```{r ej. 8 - datos, message = FALSE}
+# Opción 1 - dos líneas por fabricante, una por cada año (1999 y 2008)
+mpg %>%
+  group_by(manufacturer, year) %>%
+    summarise(mean_cty = mean(cty))
 
-9. Calcular el rendimiento promedio en carretera (`hwy`), para 3 marcas seleccionadas aleatoriamente y ordena el resultado de menor a mayor
+# Opción 2 - dos líneas por fabricante, según el año sea mayor o menor a 2004
+mpg %>%
+  group_by(manufacturer, year < 2004) %>%
+    summarise(mean_cty = mean(cty))
 
+# Opción 3 - una línea por fabricante
+mpg %>%
+  mutate(cty,
+         cty_before2004 = ifelse(year < 2004, cty, NA),
+         cty_after2004 = ifelse(year >= 2004, cty, NA)) %>%
+    group_by(manufacturer) %>%
+      summarise(mean_cty = mean(cty),
+                mean_cty_before2004 = mean(cty_before2004, na.rm = TRUE),
+                mean_cty_after2004 = mean(cty_after2004, na.rm = TRUE))
+
+```
+
+```{r ej. 8 gráfico, message = FALSE}
+mpg %>%
+  group_by(manufacturer, year) %>%
+    summarise(mean_cty = mean(cty)) %>%
+      ggplot() +
+      geom_col(aes(x = reorder(manufacturer, -mean_cty), y = mean_cty, fill = year > 2004),
+               position = "dodge") +
+      labs(x = "fabricante",
+           y = "rendimiento promedio",
+           fill = NULL,
+           title = "Rendimiento promedio en ciudad (en millas por galón)",
+           subtitle = "1999 - 2008") +
+      scale_fill_manual(labels = c("Antes de 2004", "Después de 2004"),
+                        values = c("FALSE" = "sienna2", "TRUE" = "olivedrab3")) +
+      theme (plot.title = element_text(face = "bold"),
+             axis.title = element_text(face = "bold"),
+             axis.text.x = element_text(angle = 90),
+             legend.position = "bottom")
+
+```
+ 
+ 
+ 
+9. Calcular el rendimiento promedio en carretera (`hwy`), para 3 marcas seleccionadas aleatoriamente y ordena el resultado de menor a mayor.
+
+```{r ej. 9}
+mpg %>%
+  filter(manufacturer == sample(manufacturer, 3)) %>%
+    group_by(manufacturer) %>%
+      summarise(mean_hwy = mean(hwy)) %>%
+        arrange(mean_hwy)
+```
+ 
+ 
+ 
 10. Crear una nueva variable que transforme  `hwy` (millas por galón) en litros/100 km.
 Primero tenés que saber la conversión de galones a litros y de millas a kilómetros.
 
 `1 gallón = 3.78541 litros`
 
 `1 milla = 1.60934 km`
+
+```{r ej. 10}
+mpg %>%
+  mutate(hwy, l100km = (3.78541/1.60934)/hwy)
+```
+
