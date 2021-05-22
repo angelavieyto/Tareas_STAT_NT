@@ -4,7 +4,7 @@ author: "Ángela Vieyto 5.487.839-8"
 date: "Entrega 17/5/2021"
 output: pdf_document
 ---
-
+\newcommand{\m}{\ \newline\textcolor{blue}{Comentario: }\textcolor{red}}
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -45,7 +45,7 @@ Hay 5 autos con un rendimiento en ciudad de 9 millas por galón de combustible, 
 select(mpg, c(displ, hwy))
 ```
  
- 
+\m{No es necesario concatenar}
  
 4. Seleccionar desde la variable `trans` hasta la variable `hwy`.
 
@@ -89,7 +89,7 @@ mpg %>%
 ```
 
 Mientras que Honda presenta el mejor rendimiento promedio en ciudad (ascendiendo a 24 millas por galón), Lincoln presenta el peor rendimiento (ascendiendo a 11 millas por galón).
- 
+\m{Excelente!!}
  
  
 7. Para cada marca: calcular el rendimiento promedio en ciudad, el error estándar de la media y el rango.
@@ -110,7 +110,7 @@ mpg %>%
               min_cty = min(cty),
               max_cty = max(cty))
 ```
-
+\m{Falta calcular el rango max - min. En el primer casos se duplican las filas lo cual es un error. Y es el error estándar de la media no el desvío estándar}
  
  
 8. Mejora en el rendimiento: calcular el rendimiento promedio para cada marca, distinguiendo antes y después de 2004
@@ -185,3 +185,4 @@ mpg %>%
   mutate(hwy, l100km = (3.78541/1.60934)/hwy)
 ```
 
+\m{Excelente trabajo nuevamente!!}

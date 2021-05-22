@@ -7,6 +7,7 @@ output:
   html_document: default---
 ---
 
+\newcommand{\m}{\ \newline\textcolor{blue}{Comentario: }\textcolor{red}}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -15,9 +16,10 @@ Para esta tarea deberás usar los datos de propinas disponibles en EVA.
 
 ```{r carga de datos}
 library(readxl)
-propina <- read_excel("Actividad 7/propina.xlsx")
+propina <- read_excel("propina.xlsx")
 head(propina)
 ```
+\m{Ojo con el directorio}
 
 ```{r procesamiento de datos}
 str(propina)
@@ -104,7 +106,7 @@ ggplot(propina, aes(total, propina, color = fuma)) + geom_point() + geom_smooth(
 
 2. Cambiar el color de la linea a negro.
 
-```{r ej. 2.1.}
+```{r ej22}
 ggplot(propina, aes(total, propina, color = fuma)) + geom_point() +
   geom_smooth(color = "black") +
   scale_color_brewer(palette = "Dark2") +
@@ -114,6 +116,7 @@ ggplot(propina, aes(total, propina, color = fuma)) + geom_point() +
   theme(axis.title = element_text(face = "bold")) +
   theme(legend.title = element_text(face = "bold"), legend.position = "bottom")
 ```
+\m{Revisar method = lm}
 
 # Ejercicio 3
 
@@ -132,7 +135,7 @@ ggplot(propina, aes(dia, fill = dia)) + geom_bar()
 3. Ordena los días según frecuencia (usá `fct_infreq()` de la librería `forcats`).
 
 ```{r instalar paquete}
-install.packages("forcats")
+# install.packages("forcats")
 library(forcats)
 ```
 
@@ -145,3 +148,5 @@ ggplot(propina, aes(x = fct_infreq(dia), fill = dia)) + geom_bar()
 ```{r ej. 3.4.}
 ggplot(propina, aes(x = fct_infreq(dia), fill = dia)) + geom_bar() + coord_flip()
 ```
+
+\m{Excelente trabajo. Duda: Te compilo el archivo? Cuidado con los nombres de los chunks. NO deberían tener espacios ni puntos, se recomienda solo guiones y no se pueden repetir los nombres.}

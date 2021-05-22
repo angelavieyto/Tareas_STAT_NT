@@ -6,7 +6,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-
+\newcommand{\m}{\ \newline\textcolor{blue}{Comentario: }\textcolor{red}}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -63,6 +63,7 @@ ggplot(mpg, aes(hwy, cty)) + geom_jitter(color = "purple", alpha = 0.3) +
 
 La opción `geom_jitter` facilita la visualización ya que atenúa el sobre ploteo generado por la gran cantidad de datos existentes.
 La forma en que lo hace es añadiendo ruido aleatorio a cada punto del diagrama, de forma de dispersarlos entre sí.
+\m{La preferida seria la transparencia al ser variables continuas. Pero la explicación es correcta.}
 
 #  Ejercicio 3
 
@@ -105,3 +106,5 @@ ggplot(mpg, aes(hwy, cty, color = class)) + geom_jitter(alpha = 0.5) +
   theme(axis.title = element_text(face = "bold"))
 
 ```
+
+\m{Muy buen trabajo, excelente en agregar elementos extras.}
