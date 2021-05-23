@@ -67,7 +67,7 @@ La forma en que lo hace es añadiendo ruido aleatorio a cada punto del diagrama,
 
 #  Ejercicio 3
 
-Usá como base el gráfico del ejercicio 2 con `geom_jitter.
+Usá como base el gráfico del ejercicio 2 con `geom_jitter`.
 
 1. Coloreá usando la variable `class`
 
