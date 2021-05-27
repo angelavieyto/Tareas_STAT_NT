@@ -1,0 +1,15 @@
+Campo;Tipo;Etiqueta;Descripción
+AÑO;numérico;Año;Año
+CE_SP;numérico;Centrales eléctricas servicio público;Emisiones de CO2 provenientes de la quema de combustibles fósiles de las centrales eléctricas que integran el Sistema Interconectado Nacional (SIN). (Unidad: Gg CO2)
+CP;numérico;Consumo propio;Emisiones de CO2 provenientes de la quema de combustibles fósiles asociadas al consumo propio del sector energético. (Unidad: Gg CO2)
+I_E;numérico;Subtotal Industrias de la Energía;Emisiones de CO2 provenientes de la quema de combustibles fósiles en las industrias de la energía. Incluye las centrales eléctricas de servicio público y el consumo propio.  (Unidad: Gg CO2)
+R;numérico;Residencial;Emisiones de CO2 provenientes de la quema de combustibles fósiles en los hogares. (Unidad: Gg CO2)
+C_S_SP;numérico;Comercial/servicios/sector público;Emisiones de CO2 provenientes de la quema de combustibles fósiles en las actividades comprendidas en las secciones desde D hasta U según la clasificación CIIU Rev. 4 excluyendo la sección F. (Unidad: Gg CO2)
+T;numérico;Transporte;Emisiones de CO2 provenientes de la quema de combustibles fósiles del transporte individual y/o colectivo por medios aéreos / terrestres / fluviales. No incluye las emisiones de CO2 del transporte interno de los establecimientos ni tampoco el de búnker internacional. (Unidad: Gg CO2)
+I;numérico;Industrial;Emisiones de CO2 provenientes de la quema de combustibles fósiles en la industria manufacturera y la construcción correspondientes a las Secciones C y F de la clasificación CIIU Rev. 4. Incluye las agroindustrias y la industria pesquera. Incluye también las emisiones de CO2 provenientes de las centrales eléctricas de autoproducción. (Unidad: Gg CO2)
+A_P_M;numérico;Agro/pesca/minería;Emisiones de CO2 provenientes de la quema de combustibles fósiles de las siguientes actividades: producción agropecuaria / actividad forestal / pesca industrial / pesca artesanal / actividad minera. (Unidad: Gg CO2)
+NI;numérico;No identificado;Emisiones de CO2 provenientes de la quema de combustibles fósiles de aquellos consumos no identificados con un sector en particular. (Unidad: Gg CO2)
+S_C;numérico;Subtotal Sectores de Consumo;Emisiones de CO2 provenientes de la quema de combustibles fósiles en los sectores de consumo.  (Unidad: Gg CO2)
+TOTAL;numérico;Total;Total de emisiones de CO2. Incluye industrias de la energía y sectores de consumo. (Unidad: Gg CO2)
+Q_B;numérico;Quema de biomasa;"Emisiones de CO2 debidas a la quema de biomasa con fines energéticos (leña / residuos de biomasa / carbón vegetal para toda la serie; biocombustibles a partir de 2010). Se presentan como partidas informativas y no se incluyen en el total. (Unidad: Gg CO2)"
+BI;numérico;Búnkers internacionales;Emisiones de CO2 provenientes de la quema de combustibles fósiles de bunkers internacionales tanto marítimo como aéreo. Se presentan como partidas informativas y no se incluyen en el total. (Unidad: Gg CO2) 
