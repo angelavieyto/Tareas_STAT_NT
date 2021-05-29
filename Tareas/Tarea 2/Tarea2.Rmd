@@ -3,9 +3,13 @@ title: "Tarea 2"
 author: "Ángela Vieyto 5.487.839-8"
 date: "Entrega 26 de Abril"
 output:
-  pdf_document: default
+  pdf_document:
+    latex_engine: xelatex
   fig_caption: true
 ---
+
+\newcommand{\m}{\ \newline\textcolor{blue}{Comentario: }\textcolor{red}}
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, tidy.opts = list(width.cutoff = 50), tidy = TRUE, fig.pos = 'h', out.extra = '')
 ```
@@ -128,6 +132,9 @@ En el gráfico G3 podemos observar una relación positiva entre la esperanza de 
 
 Podríamos decir que un modelo de regresión lineal proporciona un ajuste muy bueno en Oceanía, pero quizás no tanto en el resto de los continentes, donde la relación entre las variables es más difusa.
 
+\m{Excelente! Podemos liberar la escala en el eje x puesto que los valores son muy diferentes y queremos visualizar que sucede en cada continente. O bien usar una escala logaritmica. No se si el color ayuda en este caso en la medida que ya hay un facet eso se lo consultaría a Natalia, he visto que papers que usan ambas formas.}
+
+
 4. ***Hacer un gráfico de lineas que tenga en el eje `x` `year` y en el eje `y`  `gdpPercap` para cada continente en una misma ventana gráfica. En cada continente, el gráfico debe contener una linea para cada país a lo largo del tiempo (serie de tiempo de `gdpPercap`). Las etiquetas de los ejes deben ser claras y describir las variables involucradas. Incluir un `caption` en la Figura con algún comentario de interés que describa el gráfico.***
 
 ```{r ej1p4A, message = FALSE, warning = FALSE}
@@ -210,7 +217,7 @@ Cabe destacar el caso de África, donde encontramos países más estancados y al
 
 También encontramos países estancados en América y Asia, contrastando nuevamente con Europa y Oceanía, donde se puede apreciar mayor estabilidad característica de los países primermundistas.
 
-
+\m{Excelente. Podríamos ver los gráficas de la aceleración}
 
 5. ***Usando los datos `gapminder` seleccione una visualización que describa algún aspecto de los datos que no exploramos. Comente algo interesante que se puede aprender de su gráfico.***
 
@@ -244,6 +251,7 @@ También podemos observar que la población de Oceanía permanece prácticamente
 
 Por otro lado, América y África triplicaron su población en el período, alcanzando en 2007 una población similar entre sí.
 
+\m{Muy muy bien! Aunque me fijaría en las tasas de crecimiento poblacionales porque las escalas son muy diferentes. De hecho en escala logaritmica no se aprecian diferencias.}
 
 ## Ejercicio 2
 
@@ -435,6 +443,8 @@ Dentro de las principales afectaciones a la salud derivadas de absorber estos co
 
 Con base en estos resultados podemos afirmar que esta fuente de emisión debería ser el principal foco de actuación de toda política que busque reducir la contaminación ambiental por emisiones de CO2 y proteger la salud de la población.
 
+\m{Mi primer comentario es: simplemente excelente. El segundo es si el aumento de la biomasa quemada no se da también por el aumento de la superficie plantada para las plantas de celulosa. La ley forestal si mal no recuerdo es de los años 90 y da impulso a este sector en Uruguay. En ese caso podría que ser que uno de los factores que explica el aumento de la quema de biomasa es la mayor cantidad de árboles plantados y posteriormente talados? Es una pregunta porque no se al respecto pero muchas gracias por la información!}
+
 6. ***Replique el siguiente gráfico usando `ggplot2`. Incluir un `caption` en la figura con algún comentario de interés que describa el gráfico.***
 
 
@@ -475,21 +485,22 @@ datos %>%
            y = "Emisión de CO2 en Gg",
            caption = "Relación entre el total de emisiones de CO2 y el tiempo.") +
     stat_peaks(color = "red", geom = "point") +
-    stat_peaks(color = "red", geom = "text", , vjust = -0.6, size = 3)
+    stat_peaks(color = "red", geom = "text", vjust = -0.6, size = 3)
 
 ```
 En el gráfico anterior vemos que las emisiones alcanzaron un pico en 1999 seguido de una caída abrupta, probablemente relacionada con la firma del Protocolo de Kioto en ese mismo año, con el objetivo de reducir las emisiones de gases de efecto invernadero a nivel internacional.
+\m{Arranca la recesión de la economía uruguaya también desde 1999-1998 hasta el tercer trimestre de 2003}
 
 Sin embargo, observamos que a partir de 2003 las emisiones comenzaron a aumentar hasta alcanzar un récord histórico a nivel mundial en 2008. A partir de este año también encontramos una caída pronunciada debida a varios factores de los cuales se destacan:
 
-- El alto precio del CO2 y del petróleo que redujeron el uso del transporte.
+- El alto precio del CO2 y del petróleo que redujeron el uso del transporte. \m{Esto es demostrable?}
 
-- La crisis económica que provocó un descenso en la producción industrial.
+- La crisis económica que provocó un descenso en la producción industrial. \m{Ojo que en Uruguay no hubo crisis aunque si hay un efecto de la crisis internacional del 2008}
 
-- El desplazamiento hacia fuentes alternativas de energía como la eólica y la hidráulica. 
+- El desplazamiento hacia fuentes alternativas de energía como la eólica y la hidráulica. \m{Buen punto}
 
 Las emisiones de CO2 alcanzaron un nuevo récord en 2012, año en el cual finalizaba el primer período de compromiso del Protocolo de Kioto. Adicionalmente, la NASA catalogó a este año como el noveno más caluroso desde 1880, lo cual alertó a la población sobre los efectos del cambio climático. En 2013 comenzó el segundo período de compromiso del Protocolo, lo cual sumado a la mayor conscientización ambiental repercutió en la disminución de las emisiones de CO2.
-
+\m{¿Qué efecto puede tener la actividad económica? ¿Cómo se correlaciona con el PIB y como sería el efecto si controlamos por actividad económica? Porque desde 2003 hasta 2008 las tasas de crecimiento del producto son del orden del 6%, una barbaridad. Y a partir de 2011-2012 las tasas de crecimiento pasan a ser del orden del 2-3% hasta bajar a 1%. ¿Es el factor institucional de la firma del tratado de Kioto relevante al explicar estos movimientos?}
 
 ## Ejercicio 4
 
@@ -698,9 +709,9 @@ muestra %>%
                               "1" = "Abandono"))
 ```
 Si miramos la distribución por sexo encontramos que no hay diferencias importantes entre los estudiantes que abandonan y los que no. En ambos casos, la composición de estudiantes es de aproximadamente el 50% de mujeres y 50% de hombres, por lo tanto, no parece existir evidencia de que el sexo sea un determinante del abandono estudiantil.
+\m{Muy bien nuevamente. Tendría un poco de cuidado en hacer mención a relaciones causales. Y siempre decir "importantes" o "evidencia" debería estar acompañado de algo más, por ejemplo un test estadístico, un análisis de regresión para analizar significatividad de coeficientes buscando explicar alguna variable de interés, etc...}
 
 
-
-
+\m{A nivel general el trabajo es notable. Me dió gusto corregirlo por lo ordenado, correcto, detallado, hacer más de lo que se pide y por la curiosidad en el análisis exploratorio de buscar potenciales factores que estén detrás de ciertos fenómenos o de ver que pasa en valores que parecen atípicos (como en Kuwait). En ese sentido, el trabajo tiene todos los puntos y más, simplemente excelente. Por otro lado, tendría más cuidado en las afirmaciones de los análisis, es decir, aveces podemos ver una relación entre dos variables que cuando controlamos por otro factor desaparece (podrían ser condicionalmente independientes, por ejemplo). Cuando decimos que un factor causa a otra variable...cuidado. Podemos regresar dos variables y que el coeficiente sea estadístifcamente significativo y al agregar una tercera que deje de serlo, etc. Otra, cuidado con las escalas de los gráficos, ahí podemos usar una transformación (ejemplo, log) ó en el facet dejar la escala libre ó si son variables en el tiempo analizar sus tasas de crecimiento en vez de su valor en niveles. Y por último, el único error que tiene el trabajo es la ausencia de captions que en las actividades no los pedimos pero acá si son necesarios. El caption que aparece debajo de las figuras "Figura XX ...." con la explicación del gráfico de forma que sea autocontenido. De hecho, en ese caso no es necesario poner titulo a los gráficos y no se acostumbra hacer en los artículos. Finalmente, volver a decir que el trabajo fue EXCELENTE.}
 
 
