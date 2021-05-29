@@ -126,7 +126,7 @@ gapminder %>%
 ```
 En el gráfico G3 podemos observar una relación positiva entre la esperanza de vida al nacer y el PIB per cápita en todos los continentes. Esto significa que a mayor PIB per cápita se puede esperar que la esperanza de vida promedio al nacer sea mayor.
 
-Podríamos decir que esta relación está más fuertemente marcada en Oceanía que en el resto de los continentes.
+Podríamos decir que un modelo de regresión lineal proporciona un ajuste muy bueno en Oceanía, pero quizás no tanto en el resto de los continentes, donde la relación entre las variables es más difusa.
 
 4. ***Hacer un gráfico de lineas que tenga en el eje `x` `year` y en el eje `y`  `gdpPercap` para cada continente en una misma ventana gráfica. En cada continente, el gráfico debe contener una linea para cada país a lo largo del tiempo (serie de tiempo de `gdpPercap`). Las etiquetas de los ejes deben ser claras y describir las variables involucradas. Incluir un `caption` en la Figura con algún comentario de interés que describa el gráfico.***
 
@@ -214,7 +214,7 @@ También encontramos países estancados en América y Asia, contrastando nuevame
 
 5. ***Usando los datos `gapminder` seleccione una visualización que describa algún aspecto de los datos que no exploramos. Comente algo interesante que se puede aprender de su gráfico.***
 
-```{r ej1p5}
+```{r ej1p5, message = FALSE, warning = FALSE}
 gapminder %>% 
   group_by(continent, year) %>% 
     summarise(sum_pop = sum(pop)) %>% 
@@ -242,7 +242,7 @@ Intuitivamente, Asia es el continente que presenta mayor población y, a su vez,
 
 También podemos observar que la población de Oceanía permanece prácticamente constante y la población de Europa presenta un incremento moderado respecto a 1952.  
 
-Por otro lado, América y África triplicaron su población, prácticamente igualándola entre sí. 
+Por otro lado, América y África triplicaron su población en el período, alcanzando en 2007 una población similar entre sí.
 
 
 ## Ejercicio 2
@@ -364,7 +364,7 @@ datos %>%
       arrange(desc(mean_emision)) %>% 
         head(5)
 ```
-
+Las fuentes con mayor emisión media son la quema de biomasa, el transporte, los búnkers internacionales, las centrales eléctricas servicio público y el sector industrial, en ese orden.
 
 
 
@@ -403,7 +403,37 @@ datos %>%
 ```
 Podemos ver que los búnkers internacionales y las industrias presentan una trayectoria más o menos estable a lo largo del tiempo, mientras que las centrales eléctricas denotan mayor volatilidad, con picos a lo largo de todo el período. Por su parte, el transporte y la quema de biomasa no solo son las mayores fuentes de emisión de CO2, sino que además presentan una trayectoria creciente a lo largo del tiempo.
 
-Con base en estos resultados podemos afirmar que estas últimas dos fuentes de emisión deberían ser los principales focos de actuación de toda política que busque reducir la contaminación ambiental por emisiones de CO2.
+En particular, resulta un tanto alarmante el incremento de emisiones de CO2 por quema de biomasa en los últimos años. No solamente por la emisión en sí misma, sino por el incremento en la cantidad de biomasa quemada que esto implica.
+
+Los principales materiales que se utilizan para la quema de biomasa son madera y basura. Por lo tanto, un incremento en la cantidad de biomasa quemada es debida a un incremento en la madera talada o bien a un incremento de la basura generada. Ambos representan situaciones no deseadas, pero el incremento de la madera talada es de especial importancia ya que son los bosques los encargados de absorber el CO2 presente en la atmósfera. Al talar madera para la quema de biomasa no solo estamos incrementando las emisiones de CO2, sino que estamos disminuyendo la absorción del mismo.
+
+Adicionalmente, el CO2 no es la única sustancia que se emite a la atmósfera debido a la quema de biomasa, sino que también se emiten sustancias como: 
+
+- **Sustancias emitidas por la quema de madera:** sustancias catalogadas de cancerígenas como el benzopireno y ciertos hidrocarburos.
+
+- **Sustancias emitidas por la quema de basura:** sustancias altamente contaminantes debido a la presencia de plásticos y cloro como las dioxinas, furanos y el ácido clorhídrico (sustancias tóxicas).
+
+- **Sustancias emitidas por el proceso de combustión:** sustancias tóxicas y/o cancerígenas como el óxido de nitrógeno, monóxido de carbono, óxido de azufre o ácido sulfúrico, arsénico, ácido acético, fenol, benceno, tolueno, benzopireno y residuos sólidos y líquidos como las cenizas.
+
+Como si esto fuera poco, durante el proceso se utilizan sustancias que pueden contaminar agua y suelo, debido a las sustancias tóxicas entre los compuestos que constituyen las cenizas (plomo y cadmio).
+
+Esta batería de sustancias no solo representan un riesgo para el medioambiente, sino también para la salud de las personas, ya que las sustancias emitidas pasan al medio (agua, suelo, aire) y a los alimentos, llegando fácilmente a las personas.
+
+Dentro de las principales afectaciones a la salud derivadas de absorber estos contaminantes destacan:
+
+- Afecciones respiratorias como bronquitis o asma.
+
+- Enfermedades cardiovasculares como infartos de miocardio y accidentes cerebrovasculares (ACVs).
+
+- Efectos neurológicos como párkinson o alzhéimer.
+
+- Distintos tipos de cáncer como cáncer de pulmón, de mama o leucemia.
+
+- Efectos endócrinos como diabetes.
+
+- Mortalidad prematura.
+
+Con base en estos resultados podemos afirmar que esta fuente de emisión debería ser el principal foco de actuación de toda política que busque reducir la contaminación ambiental por emisiones de CO2 y proteger la salud de la población.
 
 6. ***Replique el siguiente gráfico usando `ggplot2`. Incluir un `caption` en la figura con algún comentario de interés que describa el gráfico.***
 
@@ -411,7 +441,7 @@ Con base en estos resultados podemos afirmar que estas últimas dos fuentes de e
 ![](pl1.pdf)
 
 
-```{r ej3p6}
+```{r ej3p6, message = FALSE, warning = FALSE}
 datos %>% 
   filter(AÑO < 2017) %>% 
     ggplot(aes(x = reorder(fuente, -emision, median), y = emision)) +
@@ -420,6 +450,10 @@ datos %>%
            y = "Emisión de CO2 en Gg",
            caption = "Distribución de las emisiones de CO2 según las distintas fuentes de emisión.")
 ```
+En el gráfico anterior podemos apreciar que nuevamente destaca la emisión por quema de biomasa, ya que la caja está situada por encima de las demás fuentes de emisión (a excepción del total y el subtotal del sector de consumo).
+
+Vemos que presenta una caja mucho más grande que las demás, lo cual implica que el 50% de los datos están más dispersos. A su vez, la mayoría de las observaciones están por encima de la mediana, lo cual se corresponde con el incremento de los últimos años que veíamos en el gráfico G10. Esto también explica que el bigote superior sea tan largo en comparación con las otras fuentes de emisión.
+
 
 7. ***Usando la librería `ggplot2` y `ggpmisc` replique el siguiente gráfico de las emisiones totales entre 1990 y 2016.***
 ***Los puntos rojos indican los máximos locales o picos de emisión de CO2 en Gg.***
@@ -444,6 +478,18 @@ datos %>%
     stat_peaks(color = "red", geom = "text", , vjust = -0.6, size = 3)
 
 ```
+En el gráfico anterior vemos que las emisiones alcanzaron un pico en 1999 seguido de una caída abrupta, probablemente relacionada con la firma del Protocolo de Kioto en ese mismo año, con el objetivo de reducir las emisiones de gases de efecto invernadero a nivel internacional.
+
+Sin embargo, observamos que a partir de 2003 las emisiones comenzaron a aumentar hasta alcanzar un récord histórico a nivel mundial en 2008. A partir de este año también encontramos una caída pronunciada debida a varios factores de los cuales se destacan:
+
+- El alto precio del CO2 y del petróleo que redujeron el uso del transporte.
+
+- La crisis económica que provocó un descenso en la producción industrial.
+
+- El desplazamiento hacia fuentes alternativas de energía como la eólica y la hidráulica. 
+
+Las emisiones de CO2 alcanzaron un nuevo récord en 2012, año en el cual finalizaba el primer período de compromiso del Protocolo de Kioto. Adicionalmente, la NASA catalogó a este año como el noveno más caluroso desde 1880, lo cual alertó a la población sobre los efectos del cambio climático. En 2013 comenzó el segundo período de compromiso del Protocolo, lo cual sumado a la mayor conscientización ambiental repercutió en la disminución de las emisiones de CO2.
+
 
 ## Ejercicio 4
 
@@ -503,23 +549,157 @@ datos %>%
 ***Incluya en su exploración el análisis de la variabilidad tanto de  variables cuantitativas como cualitativas y covariaciones entre las mismas.***
 ***Recuerde que en las visualizaciones, las etiquetas de los ejes deben ser claras y describir las variables involucradas. Incluir un `caption` en la figura con algún comentario de interés que describa el gráfico y lo que ve en el mismo.***
 
-```{r ej4}
+```{r ej4, message = FALSE, warning = FALSE}
 muestra <- read_csv("muestra.csv")
 ```
+
+
 Preguntas orientadoras:
-1. 
-2. 
-3. 
+
+1. ¿Cuál es el departamento con la mayor tasa de inasistencias en Uruguay?
+
+2. ¿Existe una relación entre la tasa de inasistencias y el nivel de abandono?
+
+3. ¿Existen diferencias en el nivel de abandono según contexto sociocultural del liceo? ¿Y según sexo?
+
+
+_**Pregunta 1:**_
+
+_**¿Cuál es el departamento con la mayor tasa de inasistencias en Uruguay?**_
+
+```{r preg1}
+preg1 <- muestra %>%
+          group_by(nombre_departamento) %>%
+            summarise(total_inasistencias = sum(inasistencias),
+                      total_asistencias = sum(asistencias),
+                      tasa_inasistencia = total_inasistencias / (total_asistencias + total_inasistencias),
+                      tasa_asistencia = 1 - tasa_inasistencia)
+preg1
+
+preg1 %>%
+  ggplot(aes(x = reorder(nombre_departamento, -tasa_inasistencia),
+             y = tasa_inasistencia)) +
+  geom_col(fill = 2) +
+  labs(x = "",
+       y = "Tasa de inasistencia",
+       title = "G11. Tasa de inasistencia",
+       subtitle = "Período 2016",
+       caption = "Tasa de inasistencia según departamento.") +
+  theme (plot.title = element_text(face = "bold", size = 15),
+         axis.title = element_text(face = "bold"),
+         axis.text.x = element_text(angle = 90)) +
+  scale_y_continuous(label = scales::percent) +
+  geom_text(aes(label = round(tasa_inasistencia,3)*100),
+            size = 3,
+            vjust = 1.5)
+```
+Montevideo es el departamento con una tasa de inasistencia más alta, ascendiendo al 13.8% de los estudiantes de la muestra. Por su parte, Colonia es el departamento que presenta una menor tasa de inasistencia, de solo un 4.5%.
+
+
+_**Pregunta 2:**_
+
+_**¿Existe una relación entre la tasa de inasistencias y el nivel de abandono?**_
+
+```{r preg2}
+preg2 <- muestra %>%
+          group_by(Abandono) %>%
+            summarise(total_inasistencias = sum(inasistencias),
+                      total_asistencias = sum(asistencias),
+                      tasa_inasistencia = total_inasistencias/(total_asistencias + total_inasistencias),
+                      tasa_asistencia = 1 - tasa_inasistencia)
+preg2
+
+preg2 %>% 
+  ggplot(aes(x = factor(Abandono),
+             y = tasa_inasistencia,
+             fill = factor(Abandono))) +
+  geom_col() +
+  labs(x = "",
+       y = "Tasa de inasistencia",
+       title = "G12. Tasa de inasistencia",
+       subtitle = "Período 2016",
+       caption = "Relación entre la tasa de inasistencia y el abandono estudiantil.") +
+  theme (plot.title = element_text(face = "bold", size = 15),
+         axis.title = element_text(face = "bold"),
+         legend.position = "none") +
+  scale_y_continuous(label = scales::percent) +
+  scale_x_discrete(labels = c("0" = "No abandono",
+                              "1" = "Abandono")) +
+  geom_text(aes(label = round(tasa_inasistencia,3)*100),
+            size = 3,
+            vjust = 2)
+```
+
+En el gráfico G12 encontramos que la tasa de inasistencia es sensiblemente más alta para aquellos estudiantes que abandonan los estudios. Por lo tanto, intuitivamente podríamos decir que existe una relación positiva entre la tasa de inasistencia y el abandono estudiantil.
+
+
+
+
+_**Pregunta 3:**_
+
+_**¿Existen diferencias en el nivel de abandono según el contexto sociocultural del liceo? ¿Y según sexo?**_
+
+```{r, message = FALSE, warning = FALSE}
+table(muestra$Abandono, muestra$cl)
+
+muestra %>% 
+  group_by(Abandono) %>% 
+    summarise(cl, count = n()) %>% 
+      mutate(Abandono = factor(Abandono),
+             percentage = count / sum(count)) %>%
+        group_by(cl) %>%
+          ggplot(aes(x = cl, y = percentage, fill = factor(cl))) +
+          geom_bar(stat = "identity") +
+          scale_y_continuous(label = scales::percent) +
+          facet_wrap(vars(Abandono),
+                     labeller = as_labeller(c("0" = "No abandono",
+                                              "1" = "Abandono"))) +
+          scale_fill_brewer(palette = "Dark2") +
+          theme(legend.position = "none") +
+          labs(x = "Contexto sociocultural",
+               y = "",
+               title = "G13. Abandono estudiantil vs. Contexto sociocultural",
+               subtitle = "Período 2016",
+               caption = "Distribución del abandono y la permanencia estudiantil según contexto sociocultural.") +
+          theme (plot.title = element_text(face = "bold", size = 15),
+                 axis.title = element_text(face = "bold"),
+                 legend.position = "none") +
+          scale_y_continuous(label = scales::percent)
+```
+En el gráfico G13 observamos que sí existen diferencias a nivel sociocultural.
+Se desprende que el contexto 3 es en el cual más estudiantes abandonan, mientras que el contexto 5 es en el cual más estudiantes permanecen en la educación.
+
+Los contextos 1 y 5 son el segundo y tercer contexto con mayor cantidad de abandonos, presentando una cantidad de abandonos similar entre ellos. Por último, el contexto 4 es en el que se registran menos abandonos, pero esto puede deberse a que hay pocas observaciones para este contexto. 
+
 
 ```{r}
-muestra %>%
-  group_by(nombre_departamento) %>%
-  summarise(total_inasistencias = sum(inasistencias),
-            total_asistencias = sum(asistencias),
-            tasa_inasistencia = total_inasistencias/(total_asistencias + total_inasistencias))
-
-
+table(muestra$Sexo,
+      muestra$Abandono)
 ```
+
+
+```{r preg3, message = FALSE, warning = FALSE}
+muestra %>% 
+  ggplot() +
+  geom_bar(aes(x = factor(Abandono), fill = Sexo), position = "fill") +
+  labs(x = "",
+       y = "",
+       title = "G14. Abandono estudiantil vs. Sexo",
+       subtitle = "Período 2016",
+       caption = "Distribución del abandono y la permanencia estudiantil según sexo.") +
+  theme (plot.title = element_text(face = "bold", size = 15),
+         axis.title = element_text(face = "bold"),
+         legend.title = element_text(face = "bold"),
+         legend.position = "bottom") +
+  scale_y_continuous(labels = scales::percent) + 
+  scale_fill_discrete(labels = c("F" = "Femenino",
+                                  "M" = "Masculino")) +
+  scale_x_discrete(labels = c("0" = "No abandono",
+                              "1" = "Abandono"))
+```
+Si miramos la distribución por sexo encontramos que no hay diferencias importantes entre los estudiantes que abandonan y los que no. En ambos casos, la composición de estudiantes es de aproximadamente el 50% de mujeres y 50% de hombres, por lo tanto, no parece existir evidencia de que el sexo sea un determinante del abandono estudiantil.
+
+
 
 
 
