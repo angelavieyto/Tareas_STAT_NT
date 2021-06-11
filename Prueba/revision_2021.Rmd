@@ -86,6 +86,7 @@ library(xtable)
 ```{r ej1p1, message = FALSE, warning = FALSE}
 muestra <- read_csv(here("Prueba/Datos/muestra.csv"))
 ```
+\fbox{\textbf{\textcolor{violet}{(5 Puntos)}}}
 
 2. Utilizando funciones de `dplyr` transformá la variable Abandono para que sea un factor con dos niveles donde el 0 se recodifique a No y el 1 a Si. Mostrame el resultado resumido en una tabla con la cantidad de observaciones para cada categoría usando `xtable`, recordá incluir en el chunk `results='asis'`. **(10 puntos)**
 
@@ -95,7 +96,7 @@ muestra <- muestra %>%
                                                               "1" = "Si")))
 #xtable(muestra$Abandono, muestra$new_Abandono)
 ```
-
+\textbf{\textcolor{violet}{Falta agrupar y resumir el conteo para cada nivel de abandono, para que salgala tabla hay que usar results='asis como sugerido en la letra (5 Puntos)}}
 
 3. Usando funciones de `dplyr` respondé ¿Cuál es el porcentaje de abandono en Montevideo? **(10 puntos)**
 
@@ -107,7 +108,7 @@ muestra %>%
               porcentaje = abandonos/total)
 ```
 
-
+\fbox{\textbf{\textcolor{violet}{Falta multiplicar por 100 (9 Puntos)}}}
 
 4. Reproducí el siguiente gráfico y en vez de "Gráfico a replicar" (`caption`) debes agregar un título que describa la figura y algún comentario interesante de lo que observás en la misma.**(10 puntos) **
 
@@ -131,6 +132,7 @@ muestra %>%
 ```
 San José es el departamento con una tasa de abandono más alta, mientras que Flores es el deaprtamento con una tasa de abandono más baja. No obstante ello, ningún departamento supera el 15% de abandono.
 
+\fbox{\textbf{\textcolor{violet}{(10 Puntos)}}}
 
 5.  Reproducí el siguiente gráfico realizado solo con los estudiantes que abandonaron y en vez de "Gráfico a replicar" (`caption`) debes agregar un título que describa la figura y algún comentario interesante de lo que observás en la misma. La paleta usada es Dark2. **(10 puntos)**
 
@@ -157,6 +159,7 @@ muestra %>%
 ```
 Llama la atención que en el departamento de Rocha, el 100% de los estudiantes que abandonan son mujeres, mientras que en Florida y Cerro Largo ocurre exactamente lo opuesto.
 
+\textbf{\textcolor{violet}{Falta ordenar, este es un gráfico de barras apiladas al 100\% hay que incluirlo en el título(8 Puntos)}}
 
 6. Reproducí el siguiente gráfico y en vez de "Gráfico a replicar" (`caption`) debes agregar un título que describa la figura y algún comentario interesante de lo que observás en la misma. La paleta usada es Dark2.**(15 puntos)**
 
@@ -183,6 +186,9 @@ muestra %>%
   facet_wrap(vars(nombre_departamento)) +
   scale_color_brewer(palette = "Dark2")
 ```
+
+
+\textbf{\textcolor{violet}{Quedó mal calculada la proporción, falta comentario de la figura, ver sol (6 Puntos)}}
 
 
 7. Recodificá la variable `grupo_desc` que tiene 17 niveles para que de 1ro.G.1 a 1ro.G5 sea A de 1ro.G.6 a 1ro G.11 sea B y los restantes C. Mostrá el resultado seleccionando la variable recodificada y las primeras 6 filas. **(5 puntos)**
@@ -213,6 +219,8 @@ table(muestra$grupo_desc)
 ```
 
 
+\textbf{\textcolor{violet}{Quedaron mal codificadas, todas en la categoría C Ver sol.  (2 Puntos)}}
+
 8. Separá la variable Fecha.nacimiento en tres nuevas variables año, mes y dia, para ello usá la función `separate` de forma que sean numéricas.
 Mostrá el resultado seleccionando las variables documento, año, dia y mes con alguna función de `dplyr` y las primeras 6 filas.**(5 puntos)** 
 
@@ -228,6 +236,7 @@ muestra %>%
   head(6)
 ```
 
+\textbf{\textcolor{violet}{si sacás el mutate y cambiás el summarise por select funciona. 2 Puntos}}
 
 9. Convertí la variable Fecha.nacimiento como objeto de tipo Date usando  `as.Date` de R base y comprobá que la nueva variable Fecha.nacimiento es del tipo correcto. **(5 puntos)**
 
@@ -235,9 +244,11 @@ muestra %>%
 muestra %>% 
   mutate(new_fecha_nacimiento = as.Date(`Fecha nacimiento`))
 ```
-
+\fbox{\textbf{\textcolor{violet}{ (5 Puntos)}}}
 
 10. Usando la variable Fecha.nacimiento transformada, se considera que el alumno tiene extra-edad leve cuando nace antes del 30 de abril de 2003. Es decir, tiene un a\~no m\'as de la edad normativa para dicha generaci\'on. En base a esta definición creá una nueva variable (nombrala extra) que valga 1 si el alumno tiene extra edad leve y 0 si no la tiene. Muestra solo el resultado de las primeras 6 filas. Pista para que la condición tome en cuenta el formato fecha podrías usar `as.Date('2003-04-30')`. **(10 puntos)**
+
+\fbox{\textbf{\textcolor{violet}{ Ver sol.}}}
 
 11. Trabajá con un subconjunto de datos que tenga documento, Grado2013, Grado2014,Grado2015, Grado2016 y llamale reducida.
 Con los datos reducidos restructuralos para que queden de la siguiente forma usando alguna de las funciones del paquete `tidyr` que vimos en la última clase.**(5 puntos)**
@@ -257,7 +268,7 @@ A tibble: 16,092 x 3
  9  54944549 Grado2013 4º   
 10  54944549 Grado2014 5º   
 ```
-
+\fbox{\textbf{\textcolor{violet}{ Ver sol.}}}
 
 # Ejercicio 2 (25 puntos)
 
@@ -267,10 +278,13 @@ A tibble: 16,092 x 3
 
 Porque el gráfico de barras facilita la visualización en tanto el gráfico de torta puede se más complicado de entender y no lograr transmitir lo que se supone debería transmitir.
 
+\fbox{\textbf{\textcolor{violet}{ Incompleto (2 Puntos)}}}
+
+
 
 2. ¿Porqué es necesario utilizar `aspect.ratio = 1` en un diagrama de dispersión? **(5 puntos)**
 
-
+\fbox{\textbf{\textcolor{violet}{ Ver sol.}}}
 
 3. Generá una función  `compra` que tenga como argumentos un vector numérico `cprod` cantidad de productos a comprar de cada tipo y un vector numérico `cdisp` con la cantidad disponible de dichos productos (ambos vectores del mismo largo) que devuelva 1 si se pude hacer la compra y 0 en caso contrario. La compra se puede realizar siempre que haya stock suficiente para cada producto, es decir que la cantidad disponible sea igual o mayor a la cantidad comprada. A su vez si alguno de los argumentos no es un vector numérico la función no debe ser evaluada y debe imprimir el mensaje "Argumento no numérico". **(15 puntos)** 
 
@@ -300,5 +314,7 @@ compra(c("A","B"), 1:3)
 
 ```
 
+\fbox{\textbf{\textcolor{violet}{ stop en vez de print. (14 Puntos)}}}
 
+\textbf{\textcolor{violet}{ Repositorio ordenado, documento reproducible y código estructurado (15 Puntos). TOTAL DE PUNTOS 82/130}}
 
