@@ -128,6 +128,6 @@ server <- function(input, output) {
 
 shinyApp(ui = ui, server = server)
 
-
-
-
+# Puntaje 9/10
+# Esta descoordinada la tabla y el gráfico.
+# No es necesario poner los gráficos y objetos reactivo en el observeEvent
